@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MusicHub</title>
+    <!-- STYLES -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/79d8e2848d.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <figure><img src="media/icon.png" alt="logo"></figure>
+        <h1>MusicHub</h1>
+
+        <nav>
+            <ul>
+                <li><a href="home.html">Explore</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <!-- <li><a href="recomendations.html">Get recommendations</a></li> -->
+                <li><a href="report.html" class="active">Report Problems</a></li>
+                <li><button class="signIn abrir">Sign In</button></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main id="main-form">
+        <!-- MODAL -->
+        <div class="modal oculta-modal" id="modal">
+            <div class="modal-container">
+                <div class="consulta modal-div">
+                    <input type="text" name="search" class="search" placeholder="Escriba su usuario">
+                    <button type="submit" href="profile.html" id="cerrar" class="envia">Buscar <i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <section class="container-form">
+            <form action="recepción.php" method="post" name="form" id="form">
+
+                <!-- Name Input -->
+                <fieldset id="campo_nombre">
+                    <div class="entrada_campo">
+                        <input type="text" class="dato_entrada" name="name" id="name" autocomplete="off">
+                        <i class="estado_validacion fa-solid fa-circle-xmark fa-lg"></i>
+                    </div>
+                    <p class="dato_entrada_error">Write a valid name</p>
+                </fieldset>
+
+                <!-- Mail Input -->
+                <fieldset id="campo_mail">
+                    <div class="entrada_campo">
+                        <input type="email" class="dato_entrada" name="mail" id="mail" autocomplete="off">
+                        <i class="estado_validacion fa-solid fa-circle-xmark fa-lg"></i>
+                    </div>
+                    <p class="dato_entrada_error">Write a valid email</p>
+                </fieldset>
+
+                <!-- Mail Input -->
+                <fieldset id="campo_message">
+                    <div class="entrada_campo">
+                        <textarea class="dato_entrada" name="message" id="message" cols="30" rows="10" autocomplete="off"></textarea>
+                        <i class="estado_validacion fa-solid fa-circle-xmark fa-lg"></i>
+                    </div>
+                    <p class="dato_entrada_error">Write a valid email</p>
+                </fieldset>
+
+                <!-- Terms y Private Policy -->
+                <fieldset id="campo_terms">
+                    <label for="terms" class="etiqueta_entrada">
+                        <input type="checkbox" name="terms" id="terms" class="terms_checkbox">
+                        I accept the privacy terms and conditions.
+                    </label>
+                </fieldset>
+
+                <!-- Error message -->
+                <div class="mensaje_error" id="mensaje_error">
+                    <p><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;<b>Check the your inputs</b></p>
+                </div>
+
+                <!-- Submit button and success message -->
+                <div class="campo_btn_enviar">
+                    <input type="submit" class="btn_envio" value="Send form">
+                    <p class="mensaje_exito" id="mensaje_exito">Sent successfully</p>
+                </div>
+
+            </form>
+
+        </section>
+        
+
+    </main>
+
+    <footer>
+        <?php include('footer.html'); ?>
+
+    </footer>
+
+    <!-- Script -->
+    <script src="js/script.js"></script>
+    <script src="js/modal.js"></script>
+    
+</body>
+</html>
