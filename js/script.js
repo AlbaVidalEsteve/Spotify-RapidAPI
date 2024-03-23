@@ -86,8 +86,8 @@ function fetchPlaylistData(playlistID) {
       let playlistDiv = document.createElement("div");
       playlistDiv.setAttribute('class', 'playlist-div');
       playlistDiv.setAttribute('id', playlistID);
-      let tracksList = document.createElement("ul");
-      tracksList.setAttribute('class', 'tracksList');
+      // let tracksList = document.createElement("ul");
+      // tracksList.setAttribute('class', 'tracksList');
 
           // Activar playlist seleccionada
       playlistDiv.addEventListener('click', (e)=>{
@@ -95,11 +95,11 @@ function fetchPlaylistData(playlistID) {
         playlistDiv.classList.toggle('playlist-active');
         if(playlistDiv.classList[1]=="playlist-active"){
           let playlistID = playlistDiv.id;
-          if (!loadedPlaylists[playlistID]) {
-            fetchPlaylistTracks(playlistID);
-            loadedPlaylists[playlistID] = true; // Marcar la lista de reproducción como cargada
-          }
-          // fetchPlaylistTracks(playlistID);
+          // if (!loadedPlaylists[playlistID]) {
+          //   fetchPlaylistTracks(playlistID);
+          //   loadedPlaylists[playlistID] = true; // Marcar la lista de reproducción como cargada
+          // }
+          fetchPlaylistTracks(playlistID, playlistDiv);
         }
       });
 
@@ -109,7 +109,9 @@ function fetchPlaylistData(playlistID) {
       let playlistTrackNumberDom = document.createElement("p");
       let playlistContainer = document.querySelector(".playlist-container");
       playlistFigure.append(playlistImgDom);
-      playlistDiv.append(playlistFigure, playlistNameDom, playlistTrackNumberDom, tracksList);
+      // playlistDiv.append(playlistFigure, playlistNameDom, playlistTrackNumberDom, tracksList);
+      playlistDiv.append(playlistFigure, playlistNameDom, playlistTrackNumberDom);
+
       playlistContainer.appendChild(playlistDiv);
 
       // Damos contenido a los elementos del DOM
@@ -136,7 +138,7 @@ function selectPlaylists(){
 
 
 //* Cogemos info tracks x cada playlist y mostramos las tracks
-function fetchPlaylistTracks(playlistID) {
+function fetchPlaylistTracks(playlistID, playlistDiv) {
   const url = `https://spotify23.p.rapidapi.com/playlist_tracks/?id=${playlistID}&offset=0&limit=100`;
   const options = {
     method: 'GET',
@@ -150,7 +152,9 @@ function fetchPlaylistTracks(playlistID) {
   .then((response) => response.json())
   .then((data) => {
     let tracksArray = data.items;
-    let trackList = document.querySelector('.tracksList');
+    // let trackList = document.querySelectorAll('.tracksList');
+    let tracksList = document.createElement("ul");
+    tracksList.setAttribute('class', 'tracksList');
 
     tracksArray.map((track) =>{
       // Seleccionamos variables del API
@@ -188,9 +192,10 @@ function fetchPlaylistTracks(playlistID) {
         trackDiv.classList.toggle('track-active');
       });
       // Añadimos li / tracks a la ul
-      trackList.append(trackDiv);
+      tracksList.append(trackDiv);
+
     });
-    
+    playlistDiv.append(tracksList);
   });
 }
 //Cuando haya seleccionado suficientes tracks aparece el boton next
