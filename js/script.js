@@ -2,7 +2,6 @@
 let playlistContainer = document.querySelector(".playlist-container");
 let nextBtn = document.querySelector('.playlist-container button');
 let mainIndex = document.querySelector('#index');
-console.log(nextBtn)
 
 //*Almacenamos en una constante la API Key
 // let apiKey = "2e977a96admshece76346f9b6412p15c859jsn812de15db313";
@@ -15,7 +14,9 @@ let apiKey = "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651";
 //* Sign In buscar datos usuario
 document.querySelector(".envia").addEventListener("click", () => {
   userName = document.querySelector(".search").value;
-  ////open("profile.html", "_self");
+  let instructions = document.querySelector('.instructions');
+  instructions.setAttribute('class', 'hidden');
+  modal.classList.add("oculta-modal");
   const url = `https://spotify23.p.rapidapi.com/user_profile/?id=${userName}&playlistLimit=100&artistLimit=100`;
   const options = {
     method: "GET",
@@ -28,7 +29,6 @@ document.querySelector(".envia").addEventListener("click", () => {
   fetch(url, options)
     .then((response) => response.json())
     .then((datos) => {
-      ////open("profile.html", "_self");
       // Seleccionamos variables del API
       let userName = datos.name;
       let imgSrc = datos.image_url;
