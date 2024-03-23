@@ -8,7 +8,9 @@ console.log(nextBtn)
 // let apiKey = "2e977a96admshece76346f9b6412p15c859jsn812de15db313";
 //// let apiKey = "8537f834a1msh7926f4bd74ed48dp1f5493jsnf550fe5133bf";
 // let apiKey = "205c146008msh386bb49efbaf6aep1692e8jsn2c6a0adc8ee5";
-let apiKey = "a4298e97a9mshd05ca8f7f4a206fp125be3jsn9cdcc73cfd09";
+// let apiKey = "a4298e97a9mshd05ca8f7f4a206fp125be3jsn9cdcc73cfd09";
+let apiKey = "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651";
+
 
 //* Sign In buscar datos usuario
 document.querySelector(".envia").addEventListener("click", () => {
@@ -18,7 +20,7 @@ document.querySelector(".envia").addEventListener("click", () => {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "a4298e97a9mshd05ca8f7f4a206fp125be3jsn9cdcc73cfd09",
+      "X-RapidAPI-Key": "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651",
       "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
     },
   };
@@ -70,7 +72,7 @@ function fetchPlaylistData(playlistID) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "a4298e97a9mshd05ca8f7f4a206fp125be3jsn9cdcc73cfd09",
+      "X-RapidAPI-Key": "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651",
       "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
     },
   };
@@ -86,20 +88,35 @@ function fetchPlaylistData(playlistID) {
       let playlistDiv = document.createElement("div");
       playlistDiv.setAttribute('class', 'playlist-div');
       playlistDiv.setAttribute('id', playlistID);
-      // let tracksList = document.createElement("ul");
-      // tracksList.setAttribute('class', 'tracksList');
 
-          // Activar playlist seleccionada
+      /*// Activar playlist seleccionada
       playlistDiv.addEventListener('click', (e)=>{
-        // e.stopPropagation(); // Detiene la propagación del evento click
+        e.stopPropagation(); // Detiene la propagación del evento click
         playlistDiv.classList.toggle('playlist-active');
-        if(playlistDiv.classList[1]=="playlist-active"){
+        //evitar que se dupliquen los tracks de la playlist cuando hago el fetchPlaylistTracks
+        if(playlistDiv.classList.contains("playlist-active")){
           let playlistID = playlistDiv.id;
-          // if (!loadedPlaylists[playlistID]) {
-          //   fetchPlaylistTracks(playlistID);
-          //   loadedPlaylists[playlistID] = true; // Marcar la lista de reproducción como cargada
-          // }
-          fetchPlaylistTracks(playlistID, playlistDiv);
+          if (!loadedPlaylists[playlistID]) {
+            fetchPlaylistTracks(playlistID,playlistDiv);
+            loadedPlaylists[playlistID] = true; // Marcar la lista de reproducción cómo cargada
+          }
+        }
+      });*/
+
+      // Activar playlist seleccionada
+      playlistDiv.addEventListener('click', (event) => {
+        event.stopPropagation(); // Detiene la propagación del evento click
+        
+        if (!event.target.closest('.tracksList')) { // Verificar si el clic no proviene de un elemento dentro de tracksList
+          playlistDiv.classList.toggle('playlist-active');
+        }
+        
+        if(playlistDiv.classList.contains("playlist-active")){
+          let playlistID = playlistDiv.id;
+          if (!loadedPlaylists[playlistID]) {
+            fetchPlaylistTracks(playlistID,playlistDiv);
+            loadedPlaylists[playlistID] = true; // Marcar la lista de reproducción como cargada
+          }
         }
       });
 
@@ -109,7 +126,6 @@ function fetchPlaylistData(playlistID) {
       let playlistTrackNumberDom = document.createElement("p");
       let playlistContainer = document.querySelector(".playlist-container");
       playlistFigure.append(playlistImgDom);
-      // playlistDiv.append(playlistFigure, playlistNameDom, playlistTrackNumberDom, tracksList);
       playlistDiv.append(playlistFigure, playlistNameDom, playlistTrackNumberDom);
 
       playlistContainer.appendChild(playlistDiv);
@@ -143,7 +159,7 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': 'a4298e97a9mshd05ca8f7f4a206fp125be3jsn9cdcc73cfd09',
+      'X-RapidAPI-Key': '5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651',
       'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
   };
@@ -166,13 +182,13 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
       let openSpoty = track.track.external_urls.spotify;
       
       let previewAudio = document.createElement('audio');
-      // previewAudio.id = "player";
-      // let audioDiv = document.createElement("div");
-      // let playBtn = document.createElement("button");
-      // playBtn.onclick = document.getElementById('player').play();
-      // let pauseBtn = document.createElement("button");
-      // pauseBtn.onclick = document.getElementById('player').pause();
-      // audioDiv.append(playBtn,pauseBtn);
+      //// previewAudio.id = "player";
+      //// let audioDiv = document.createElement("div");
+      //// let playBtn = document.createElement("button");
+      //// playBtn.onclick = document.getElementById('player').play();
+      //// let pauseBtn = document.createElement("button");
+      //// pauseBtn.onclick = document.getElementById('player').pause();
+      //// audioDiv.append(playBtn,pauseBtn);
       previewAudio.controls = true;
       previewAudio.src = previewUrl;
 
@@ -185,7 +201,7 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
         <p><a href="${openSpoty}" target="_blank">Listen on Spotify</a></p>
       `;
       trackDiv.appendChild(previewAudio);
-      // trackDiv.appendChild(audioDiv);
+      //// trackDiv.appendChild(audioDiv);
 
       // Activar track seleccionada
       trackDiv.addEventListener('click', ()=>{
@@ -203,11 +219,11 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
 
 //* Llamamos a las recomendaciones basadas en los id de las canciones seleccionadas
 function fetchRecommendations(trackIDS){
-  const url =`https://spotify23.p.rapidapi.com/recommendations/?limit=20&seed_tracks=${trackIDS}`;
+  const url =`https://spotify23.p.rapidapi.com/recommendations/?limit=100&seed_tracks=${trackIDS}`;
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': 'a4298e97a9mshd05ca8f7f4a206fp125be3jsn9cdcc73cfd09',
+      'X-RapidAPI-Key': '5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651',
       'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
   };
@@ -220,9 +236,10 @@ fetch(url, options)
     playlistContainer.setAttribute('class', 'hidden');
     let recommendationContainer = document.createElement('section');
     recommendationContainer.setAttribute('class', 'recommendationContainer');
+    recommendationContainer.setAttribute('class', 'playlist-active');
     mainIndex.appendChild(recommendationContainer);
     let recommendationsList = document.createElement('ul');
-    // recommendationsList.setAttribute('class', 'tracksList');
+    recommendationsList.setAttribute('class', 'tracksList');
     tracksRecommended.map((trackRecommended) =>{
       // Seleccionamos variables del API
       let trackID = trackRecommended.id;
