@@ -1,7 +1,10 @@
 //* Seleccionamos elementos padre del DOM
 let playlistContainer = document.querySelector(".playlist-container");
 let nextBtn = document.querySelector('.playlist-container button');
-let mainIndex = document.querySelector('#index');
+let mainIndex = document.querySelector('#index'); 
+//Seleccionamos elementos del header
+let header = document.querySelector('header');
+let logIn = document.querySelector('.logIn');
 
 //*Almacenamos en una constante la API Key
 // let apiKey = "2e977a96admshece76346f9b6412p15c859jsn812de15db313";
@@ -17,6 +20,11 @@ document.querySelector(".envia").addEventListener("click", () => {
   let instructions = document.querySelector('.instructions');
   instructions.setAttribute('class', 'hidden');
   modal.classList.add("oculta-modal");
+  logIn.classList.add('hidden');
+  let profileFigure = document.createElement('figure');
+  let profilePhoto = document.createElement('img');
+  profileFigure.append(profilePhoto)
+  header.append(profileFigure);
   const url = `https://spotify23.p.rapidapi.com/user_profile/?id=${userName}&playlistLimit=100&artistLimit=100`;
   const options = {
     method: "GET",
@@ -34,7 +42,7 @@ document.querySelector(".envia").addEventListener("click", () => {
       let imgSrc = datos.image_url;
       let playlistNum = datos.total_public_playlists_count;
       let playlistArray = datos.public_playlists;
-
+      profilePhoto.src = imgSrc;
       // Seleccionamos elementos del DOM
       let userNameDom = document.querySelector(".userName");
       let figure = document.querySelector(".figurePhoto");
@@ -182,6 +190,7 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
       let openSpoty = track.track.external_urls.spotify;
       
       let previewAudio = document.createElement('audio');
+      previewAudio.innerHTML ='<i class="fa-solid fa-play"></i>'
       //// previewAudio.id = "player";
       //// let audioDiv = document.createElement("div");
       //// let playBtn = document.createElement("button");
@@ -198,7 +207,7 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
       trackDiv.innerHTML = `
         <p>${trackName}</p>
         <p><a href="${artistUrl}" target="_blank">${artistName}</a></p>
-        <p><a href="${openSpoty}" target="_blank">Listen on Spotify</a></p>
+        <p><a href="${openSpoty}" target="_blank">Listen on spotify  <i class="fa-brands fa-spotify"></i></a></p>
       `;
       trackDiv.appendChild(previewAudio);
       //// trackDiv.appendChild(audioDiv);
