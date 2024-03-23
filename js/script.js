@@ -198,11 +198,13 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
       //// let pauseBtn = document.createElement("button");
       //// pauseBtn.onclick = document.getElementById('player').pause();
       //// audioDiv.append(playBtn,pauseBtn);
-      previewAudio.controls = true;
+      // ! decidir que fer tema controls
+      previewAudio.controls = false;
       previewAudio.src = previewUrl;
 
       // Creamos un li para cada track
       let trackDiv = document.createElement('li');
+      trackDiv.setAttribute('class', 'track');
       trackDiv.id = trackID;
       trackDiv.innerHTML = `
         <p>${trackName}</p>
@@ -245,10 +247,10 @@ fetch(url, options)
     playlistContainer.setAttribute('class', 'hidden');
     let recommendationContainer = document.createElement('section');
     recommendationContainer.setAttribute('class', 'recommendationContainer');
-    recommendationContainer.setAttribute('class', 'playlist-active');
+    recommendationContainer.setAttribute('class', 'playlist-div');
     mainIndex.appendChild(recommendationContainer);
     let recommendationsList = document.createElement('ul');
-    recommendationsList.setAttribute('class', 'tracksList');
+    // recommendationsList.setAttribute('class', 'tracksList');
     tracksRecommended.map((trackRecommended) =>{
       // Seleccionamos variables del API
       let trackID = trackRecommended.id;
@@ -258,15 +260,16 @@ fetch(url, options)
       let artistUrl = trackRecommended.artists[0].external_urls.spotify; 
       let openSpoty = trackRecommended.external_urls.spotify;
       let previewAudio = document.createElement('audio');
-      previewAudio.controls = true;
+      previewAudio.controls = false;
       previewAudio.src = previewUrl;
       
       let divRecommendedTrack = document.createElement('li');
+      divRecommendedTrack.setAttribute('class', 'track');
       divRecommendedTrack.id = trackID;
       divRecommendedTrack.innerHTML = `
         <p>${trackName}</p>
         <p><a href="${artistUrl}" target="_blank">${artistName}</a></p>
-        <p><a href="${openSpoty}" target="_blank">Listen on Spotify</a></p>
+        <p><a href="${openSpoty}" target="_blank">Listen on Spotify  <i class="fa-brands fa-spotify"></i></a></p>
       `;
       recommendationsList.appendChild(divRecommendedTrack);
       divRecommendedTrack.appendChild(previewAudio);
