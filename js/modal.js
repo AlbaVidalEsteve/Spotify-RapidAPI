@@ -20,7 +20,6 @@ abrirVentana.addEventListener("click", () => {
   // console.log(cardVideos[index].src);
   // modalVideo.src = cardVideos[index].src;
   modal.classList.remove("oculta-modal");
-  console.log("click en abrir");
 });
 
 //Funcion cerrar modal
