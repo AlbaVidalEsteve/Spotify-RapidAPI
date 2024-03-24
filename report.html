@@ -18,18 +18,9 @@
     <header>
         <figure><img src="media/icon.png" alt="logo"></figure>
         <h1>MusicHub</h1>
-
-        <nav>
-            <ul>
-                <li><a href="home.html">Explore</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <!-- <li><a href="recomendations.html">Get recommendations</a></li> -->
-                <li><a href="report.html" class="active">Report Problems</a></li>
-                <li><button class="signIn abrir">Sign In</button></li>
-            </ul>
-        </nav>
+        <button class="logIn abrir">Log In</button>
     </header>
-    
+    <!-- MAIN CONTENT -->
     <main id="main-form">
         <!-- MODAL -->
         <div class="modal oculta-modal" id="modal">
@@ -41,10 +32,36 @@
             </div>
         </div>
 
-        <section class="container-form">
+        <div class="container">
+            <form action="processo.php" method="post" id="formulario" name="formulario">
+                <ul>
+                    <li>
+                        <input type="text" name="nombre" id="nombre" placeholder="Name">
+                    </li>
+                  
+                    <li>
+                        <input type="email" name="correo" id="correo" placeholder="E-mail">
+                    </li>
+                    <li>
+                        <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Message"></textarea>
+                    </li>
+                    <li>
+                        <input type="checkbox" name="terms" id="terms">
+                        <label for="terms"><a href="terms.html">Terms and conditions.</a></label>
+                    </li>
+                </ul>
+                <ul>
+                    <li>
+                        <input type="submit" value="Submit report">
+                    </li>
+                </ul>
+            </form>
+        </div>
+
+        <!-- <section class="container-form">
             <form action="recepción.php" method="post" name="form" id="form">
 
-                <!-- Name Input -->
+               
                 <fieldset id="campo_nombre">
                     <div class="entrada_campo">
                         <input type="text" class="dato_entrada" name="name" id="name" autocomplete="off">
@@ -53,7 +70,7 @@
                     <p class="dato_entrada_error">Write a valid name</p>
                 </fieldset>
 
-                <!-- Mail Input -->
+                
                 <fieldset id="campo_mail">
                     <div class="entrada_campo">
                         <input type="email" class="dato_entrada" name="mail" id="mail" autocomplete="off">
@@ -62,7 +79,7 @@
                     <p class="dato_entrada_error">Write a valid email</p>
                 </fieldset>
 
-                <!-- Mail Input -->
+                
                 <fieldset id="campo_message">
                     <div class="entrada_campo">
                         <textarea class="dato_entrada" name="message" id="message" cols="30" rows="10" autocomplete="off"></textarea>
@@ -71,7 +88,7 @@
                     <p class="dato_entrada_error">Write a valid email</p>
                 </fieldset>
 
-                <!-- Terms y Private Policy -->
+                
                 <fieldset id="campo_terms">
                     <label for="terms" class="etiqueta_entrada">
                         <input type="checkbox" name="terms" id="terms" class="terms_checkbox">
@@ -79,12 +96,10 @@
                     </label>
                 </fieldset>
 
-                <!-- Error message -->
                 <div class="mensaje_error" id="mensaje_error">
                     <p><i class="fa-solid fa-triangle-exclamation"></i>&nbsp;<b>Check the your inputs</b></p>
                 </div>
 
-                <!-- Submit button and success message -->
                 <div class="campo_btn_enviar">
                     <input type="submit" class="btn_envio" value="Send form">
                     <p class="mensaje_exito" id="mensaje_exito">Sent successfully</p>
@@ -92,18 +107,35 @@
 
             </form>
 
-        </section>
+        </section> -->
     </main>
 
     <footer>
-        <?php include('footer.html'); ?>
-
+        <ul>
+            <li><a href="cookies.html">Cookies</a></li>
+            <li>Contact
+                <ul>
+                    <li><a href="https://github.com/AlbaVidalEsteve/Spotify-RapidAPI" target="_blank"><i class="fa-brands fa-github"></i></a></li>
+                    <li><a href="https://www.linkedin.com/in/alba-vidal-esteve-07b801184/" target="_blank"><i class="fa-brands fa-linkedin"></i></a></li>
+                </ul>
+            </li>
+            <li><a href="politica.html">Política de privacidad</a></li>
+            <li><a href="avisoLegal.html">Aviso Legal</a></li>
+            <li><a href="report.html">Report Problems</a></li>
+            
+        </ul>
+        <div>
+            <p>Powered by <a href="https://rapidapi.com/Glavier/api/spotify23" target="_blank">Spotify Rapid API</a></p>
+            <p>&</p>
+            <p>Designed by <a href="https://github.com/AlbaVidalEsteve" target="_blank">Alba Vidal</a></p>
+        </div>
     </footer>
 
     <!-- Script -->
-    <!-- <script src="js/script.js"></script> -->
-    <!-- <script src="js/modal.js"></script> -->
-    <script src="js/hamburger-script.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/modal.js"></script>
+    <script src="js/form.js"></script>
+    <!-- <script src="js/hamburger-script.js"></script> -->
     
 </body>
 </html>

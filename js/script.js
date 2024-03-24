@@ -11,8 +11,8 @@ let logIn = document.querySelector('.logIn');
 //// let apiKey = "8537f834a1msh7926f4bd74ed48dp1f5493jsnf550fe5133bf";
 // let apiKey = "205c146008msh386bb49efbaf6aep1692e8jsn2c6a0adc8ee5";
 // let apiKey = "a4298e97a9mshd05ca8f7f4a206fp125be3jsn9cdcc73cfd09";
-let apiKey = "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651";
-
+// let apiKey = "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651";
+let apiKey = "71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265";
 
 //* Sign In buscar datos usuario
 document.querySelector(".envia").addEventListener("click", () => {
@@ -29,7 +29,7 @@ document.querySelector(".envia").addEventListener("click", () => {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651",
+      "X-RapidAPI-Key": "71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265",
       "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
     },
   };
@@ -80,7 +80,7 @@ function fetchPlaylistData(playlistID) {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651",
+      "X-RapidAPI-Key": "71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265",
       "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
     },
   };
@@ -167,7 +167,7 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651',
+      'X-RapidAPI-Key': '71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265',
       'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
   };
@@ -234,7 +234,7 @@ function fetchRecommendations(trackIDS){
   const options = {
     method: 'GET',
     headers: {
-      'X-RapidAPI-Key': '5fb3ef689dmsh9c1abdd1e347a39p1edb64jsnb037f4251651',
+      'X-RapidAPI-Key': '71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265',
       'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
     }
   };
