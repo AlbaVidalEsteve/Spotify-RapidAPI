@@ -47,9 +47,9 @@ ul{
     transition: 0.7s;
 }
 
-.playlist-active{
+.playlist-active , .playlist-div:hover{
     border: 1px solid var(--accent);
-    background-color: var(--white-50);
+    background-color: var(--white-20);
     color: var(--black);
     & .tracksList{
         padding: .3rem;
@@ -171,6 +171,7 @@ main{
     grid-template-columns: 1fr;
     align-items: center;
     gap: .3rem;
+    cursor: pointer;
     & p:nth-child(1){
         order: 1; 
     }
@@ -286,13 +287,15 @@ main{
     }
     & .playlist-div{
         display: grid;
+        /* border: 1px solid var(--white-20); */
         grid-template-columns: minmax(70px,13%) 1fr;
         column-gap: .5rem;
-        background-color: var(--white-20);
+        background-color: var(--white-05);
         padding: .5rem;
         border-radius: 0.7rem;
         color: var(--white);
         width: 100%;
+        cursor: pointer;
         & figure{
             width: 100%;
             grid-row: span 3;
@@ -318,11 +321,12 @@ main{
         & .tracksList {
             grid-column: span 2;
         }
-        & .tracksList .track-active{
+        & .tracksList .track-active, .track:hover{
             border-top: 1px solid var(--accent);
             border-bottom: 1px solid var(--accent);
             background-color: var(--black-80);
             gap: .3rem;
+            cursor: pointer;
         }
         
     }
