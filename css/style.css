@@ -78,12 +78,17 @@ header{
     & h1{
         width: 1fr;
     }
+    & a{
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+    }
 }
 
 .logIn{
-    background-color: var(--accent-disabled);
-    border: 1px solid var(--accent-disabled);
-    color: var(--white);
+    background-color: var(--white-30);
+    border: 2px solid var(--accent-disabled);
+    color: var(--accent);
     padding: .7rem;
     border-radius: 1.5rem;
     justify-self: right;
@@ -91,9 +96,9 @@ header{
     font-size: 1rem;
 }
 .logIn:hover{
-    /* background-color: var(--accent); */
-    border: 1px solid var(--accent);
-    color: var(--accent);
+    background-color: var(--accent);
+    border: 2px solid var(--accent);
+    color: var(--white);
     transition: .3s ease-out;
 }
 
@@ -199,10 +204,6 @@ main{
     }
 }
 /*? SECTION Instructions */
-/* #index{
-    background: var(--gradient);
-} */
-
 .hero {
     padding: 2rem;
     background-image: url(../media/hero-dark.png);
@@ -321,49 +322,6 @@ main{
         }
         & .tracksList {
             grid-column: span 2;
-            /* & .track{
-                padding: .5rem 0;
-                border-top: 1px solid var(--white-20);
-                border-bottom: 1px solid var(--white-20);
-                display: flex;
-                flex-wrap: wrap;
-                gap: .3rem;
-                & p:first-child{
-                    width: 100%;
-                }
-                & a{
-                    width: 100%;
-                    text-decoration: none;
-                    color: var(--accent-disabled);
-                }
-                & a:hover{
-                    color: var(--accent);
-                }
-                & audio::-webkit-media-controls-panel {
-                    background-color: var(--accent);
-                } 
-                & audio::-webkit-media-controls-mute-button,
-                audio::-webkit-media-controls-current-time-display,
-                audio::-webkit-media-controls-time-remaining-display,
-                audio::-webkit-media-controls-timeline {
-                    display: none;
-                }
-                & audio::-webkit-media-controls-mute-button,
-                audio::-webkit-media-controls-timeline-container,
-                audio::-webkit-media-controls-current-time-display,
-                audio::-webkit-media-controls-time-remaining-display,
-                audio::-webkit-media-controls-timeline,
-                audio::-webkit-media-controls-volume-slider-container,
-                audio::-webkit-media-controls-volume-slider,
-                audio::-webkit-media-controls-seek-back-button,
-                audio::-webkit-media-controls-seek-forward-button,
-                audio::-webkit-media-controls-fullscreen-button,
-                audio::-webkit-media-controls-rewind-button,
-                audio::-webkit-media-controls-return-to-realtime-button,
-                audio::-webkit-media-controls-toggle-closed-captions-button{
-                    display: none;
-                }
-            } */
         }
         & .tracksList .track-active{
             border-top: 1px solid var(--accent);
@@ -408,21 +366,18 @@ form ul{
         & input:not(input[type="checkbox"], input[type="submit"]), textarea{
             width: 100%;
             background-color: var(--white-20);
-            border: none;
-            border-bottom:1px solid var(--accent-disabled);
+            border: 2px solid transparent;
+            border-bottom:2px solid var(--accent-disabled);
             border-radius: 0.15rem;
             padding: .3rem;
             line-height: 1.5rem;
             font-size: 1.1rem;
-        }
-        & input:not(input[type="checkbox"], input[type="submit"]):hover, textarea:hover,input:not(input[type="checkbox"], input[type="submit"]):focus, textarea:focus{
-            background-color: var(--white-50);
-            border:2px solid var(--accent);
             color: var(--accent);
         }
-        /* & input[type="text"]::placeholder:hover, input[type="email"]::placeholder:hover,textarea::placeholder:hover, input[type="text"]:focus::placeholder, input[type="email"]::placeholder:focus,textarea::placeholder:focus{
-            color: var(--accent-disabled);
-        } */
+        & input:not(input[type="checkbox"], input[type="submit"]):hover, textarea:hover,input:not(input[type="checkbox"], input[type="submit"]):focus, textarea:focus{
+            background-color: var(--white-30);
+            border:2px solid var(--accent);
+        }
     }
 }
 
