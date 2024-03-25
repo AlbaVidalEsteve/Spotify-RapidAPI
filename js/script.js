@@ -217,7 +217,7 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
         //// pauseBtn.onclick = document.getElementById('player').pause();
         //// audioDiv.append(playBtn,pauseBtn);
         // ! decidir que fer tema controls
-        previewAudio.controls = false;
+        previewAudio.controls = true;
         previewAudio.src = previewUrl;
 
         // Creamos un li para cada track
@@ -227,9 +227,10 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
         trackDiv.innerHTML = `
         <p>${trackName}</p>
         <p><a href="${artistUrl}" target="_blank">${artistName}</a></p>
-        <p><a href="${openSpoty}" target="_blank">Listen on spotify  <i class="fa-brands fa-spotify"></i></a></p>
+        <audio controls="true" src="${previewUrl}"><i class="fa-solid fa-play" aria-hidden="true"></i></audio>
+        <p class="spoty"><a href="${openSpoty}" target="_blank">Listen on spotify  <i class="fa-brands fa-spotify"></i></a></p>
       `;
-        trackDiv.appendChild(previewAudio);
+        // trackDiv.appendChild(previewAudio);
         //// trackDiv.appendChild(audioDiv);
 
         // Activar track seleccionada
@@ -267,7 +268,6 @@ function fetchRecommendations(trackIDS) {
       recommendationContainer.setAttribute("class", "playlist-div");
       mainIndex.appendChild(recommendationContainer);
       let recommendationsList = document.createElement("ul");
-      // recommendationsList.setAttribute('class', 'tracksList');
       tracksRecommended.map((trackRecommended) => {
         // Seleccionamos variables del API
         let trackID = trackRecommended.id;
@@ -277,7 +277,6 @@ function fetchRecommendations(trackIDS) {
         let artistUrl = trackRecommended.artists[0].external_urls.spotify;
         let openSpoty = trackRecommended.external_urls.spotify;
         let previewAudio = document.createElement("audio");
-        previewAudio.controls = false;
         previewAudio.src = previewUrl;
 
         let divRecommendedTrack = document.createElement("li");
@@ -286,6 +285,7 @@ function fetchRecommendations(trackIDS) {
         divRecommendedTrack.innerHTML = `
         <p>${trackName}</p>
         <p><a href="${artistUrl}" target="_blank">${artistName}</a></p>
+        <audio controls="true" src="${previewUrl}"><i class="fa-solid fa-play" aria-hidden="true"></i></audio>
         <p><a href="${openSpoty}" target="_blank">Listen on Spotify  <i class="fa-brands fa-spotify"></i></a></p>
       `;
         recommendationsList.appendChild(divRecommendedTrack);
@@ -301,16 +301,3 @@ function fetchRecommendations(trackIDS) {
       recommendationContainer.appendChild(recommendationsList);
     });
 }
-
-/* 
-? es millor buscar totes les cançons de cop per totes les playlist per reduir el num de peticions? en lloc de obrir i tancar playlists per veure els tracks?
-
-done: queryselectorAll('.playlist-div') -> addEventListener(click) -> toggle('active')
-done: queryselectorAll('.active) -> get tracks
-done: fetch track for each playlist id
-TODO: show tracks -> acordeon en cada playlist
-TODO: queryselectorAll('.track-div') -> addEventListener(click) -> toggle('.track-active')
-TODO: queryselectorAll('.track-active) -> get ids -> make an array /string
-TODO: fetch recommendations based on the track ids (string separated by comas)
-
-*/

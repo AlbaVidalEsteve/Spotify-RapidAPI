@@ -9,6 +9,7 @@
 :root{
     font-size: 16px;
     --black: #16191c;
+    --black-80: rgba(22, 25, 28, 0.80);
     --white-05: rgba(255, 255, 255, 0.05);
     --white-20: rgba(255, 255, 255, 0.20);
     --white-30: rgba(255, 255, 255, 0.30);
@@ -28,6 +29,7 @@ body{
     flex-direction: column;
     background-color: var(--black);
     color: var(--white);
+    scroll-behavior: smooth;
 }
 /* Presets */
 h1, h2, h3, h4{
@@ -58,6 +60,10 @@ ul{
 
 /** HEADER */
 header{
+    /* position: sticky;
+    background-color: var(--black-80) ;
+    backdrop-filter: blur(5px);
+    top: 0; */
     flex: 0 0 auto;
     width: 100%;
     height: 11vh;
@@ -152,56 +158,50 @@ main{
     display: flex;
     flex-direction: column;
     width: 100%;
+    scroll-snap-type: y mandatory;
     & section{
         padding: 2rem;
         display: flex;
         flex-direction: column;
         gap: 1rem;
+       
 
     }
 }
 .track{
-    padding: .5rem 0;
+    padding: .5rem;
     border-top: 1px solid var(--white-20);
     border-bottom: 1px solid var(--white-20);
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
     gap: .3rem;
-    & p:first-child{
-        width: 100%;
+    & p:nth-child(1){
+        order: 0; 
+    }
+    & p:nth-child(2){
+        
+        order: 1;
+    }
+    & .spoty{
+        order: 3;
     }
     & a{
-        width: 100%;
+        /* width: 100%; */
         text-decoration: none;
         color: var(--accent-disabled);
     }
     & a:hover{
-        color: var(--accent);
+      color: var(--accent);
+    }
+    & audio{
+        width: 100%;
+        max-width: 15rem;
+        justify-self: right;
     }
     & audio::-webkit-media-controls-panel {
         background-color: var(--accent);
     } 
-    & audio::-webkit-media-controls-mute-button,
-    audio::-webkit-media-controls-current-time-display,
-    audio::-webkit-media-controls-time-remaining-display,
-    audio::-webkit-media-controls-timeline {
-        display: none;
-    }
-    & audio::-webkit-media-controls-mute-button,
-    audio::-webkit-media-controls-timeline-container,
-    audio::-webkit-media-controls-current-time-display,
-    audio::-webkit-media-controls-time-remaining-display,
-    audio::-webkit-media-controls-timeline,
-    audio::-webkit-media-controls-volume-slider-container,
-    audio::-webkit-media-controls-volume-slider,
-    audio::-webkit-media-controls-seek-back-button,
-    audio::-webkit-media-controls-seek-forward-button,
-    audio::-webkit-media-controls-fullscreen-button,
-    audio::-webkit-media-controls-rewind-button,
-    audio::-webkit-media-controls-return-to-realtime-button,
-    audio::-webkit-media-controls-toggle-closed-captions-button{
-        display: none;
-    }
 }
 /*? SECTION Instructions */
 .hero {
@@ -326,15 +326,36 @@ main{
         & .tracksList .track-active{
             border-top: 1px solid var(--accent);
             border-bottom: 1px solid var(--accent);
-            background-color: var(--white-20);
-            display: flex;
-            flex-wrap: wrap;
+            background-color: var(--black-80);
             gap: .3rem;
         }
         
     }
 }
-/* SECTION Recommendations Container */
+/*! SECTION Recommendations Container */
+.politica, .cookies, .avisoLegal{
+    display: flex;
+    flex-direction: column;
+    & *:not(h2){
+        padding: .2rem 1rem;
+    }
+    & a{
+        padding-left: 0;
+        color: var(--accent-disabled);
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+    }
+    & a:hover{
+        color: var(--accent);
+    }
+    & .up{
+        position: fixed;
+        bottom: 1rem;
+        right: 2rem;
+        font-size: 1.5rem;
+    }
+}
 
 /*? Main form */
 form{
@@ -380,6 +401,11 @@ form ul{
         }
     }
 }
+
+/*? Legal texts */
+
+
+
 
 /*? MODAL */
 .modal{
@@ -479,6 +505,12 @@ form ul{
         width: 80%;
         margin: auto;
     }
+    .track{
+        grid-template-columns: 1fr 30%;
+        & audio{
+            grid-row: span 3;
+        }
+    }
 }
 
 @media screen and (min-width: 1024px) {
@@ -492,11 +524,7 @@ form ul{
         width: 70%;
         margin: auto;
     }
-    /* footer div{
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-    } */
+
 }
 
 @media screen and (min-width: 1440px) {
