@@ -19,7 +19,7 @@
         $_asunto = 'Report Input';
         $_correo = 'vidalba97@gmail.com';
         $_contenido = "\n".
-            $_nombre.'\n'.
+            $_nombre."\n".
             $_correo."\n".
             $_resultado."\n";
         
