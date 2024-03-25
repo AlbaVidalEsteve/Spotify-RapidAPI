@@ -16,7 +16,6 @@ let logIn = document.querySelector(".logIn");
 // let apiKey = "e469052a91mshd1b06386f5f903dp113cfejsna408402b8c5f";
 let apiKey = "00c703850dmsh3f382e5de87e1e1p124c8ajsn54b3521b1fcc";
 
-
 //* Sign In buscar datos usuario
 document.querySelector(".envia").addEventListener("click", () => {
   userName = document.querySelector(".search").value;
@@ -52,9 +51,9 @@ document.querySelector(".envia").addEventListener("click", () => {
       playlistContainer = document.createElement("section");
       playlistContainer.setAttribute("class", "playlist-container");
       nextBtn = document.createElement("button");
-      nextBtn.innerHTML = 'Get Recommendations';
+      nextBtn.innerHTML = "Get Recommendations";
       nextBtn.setAttribute("class", "logIn");
-      playlistContainer.append(nextBtn)
+      playlistContainer.append(nextBtn);
       mainIndex.append(sectionProfile, playlistContainer);
       let userNameDom = document.createElement("h2");
       userNameDom.setAttribute("class", "userName");
@@ -112,20 +111,6 @@ function fetchPlaylistData(playlistID) {
       playlistDiv.setAttribute("class", "playlist-div");
       playlistDiv.setAttribute("id", playlistID);
 
-      /*// Activar playlist seleccionada
-      playlistDiv.addEventListener('click', (e)=>{
-        e.stopPropagation(); // Detiene la propagación del evento click
-        playlistDiv.classList.toggle('playlist-active');
-        //evitar que se dupliquen los tracks de la playlist cuando hago el fetchPlaylistTracks
-        if(playlistDiv.classList.contains("playlist-active")){
-          let playlistID = playlistDiv.id;
-          if (!loadedPlaylists[playlistID]) {
-            fetchPlaylistTracks(playlistID,playlistDiv);
-            loadedPlaylists[playlistID] = true; // Marcar la lista de reproducción cómo cargada
-          }
-        }
-      });*/
-
       // Activar playlist seleccionada
       playlistDiv.addEventListener("click", (event) => {
         event.stopPropagation(); // Detiene la propagación del evento click
@@ -148,9 +133,6 @@ function fetchPlaylistData(playlistID) {
       let playlistFigure = document.createElement("figure");
       let playlistImgDom = document.createElement("img");
       let playlistTrackNumberDom = document.createElement("p");
-      // let playlistContainer = document.createElement("section");
-      // mainIndex.append(playlistContainer);
-      // playlistContainer.setAttribute("class", "playlist-container");
       playlistFigure.append(playlistImgDom);
       playlistDiv.append(
         playlistFigure,
@@ -224,7 +206,6 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
         <p class="spoty"><a href="${openSpoty}" target="_blank">Listen on spotify  <i class="fa-brands fa-spotify"></i></a></p>
       `;
 
-
         // Activar track seleccionada
         trackDiv.addEventListener("click", () => {
           trackDiv.classList.toggle("track-active");
@@ -235,8 +216,6 @@ function fetchPlaylistTracks(playlistID, playlistDiv) {
       playlistDiv.append(tracksList);
     });
 }
-//Cuando haya seleccionado suficientes tracks aparece el boton next
-//Llamar a esta funcion con un click al botton next
 
 //* Llamamos a las recomendaciones basadas en los id de las canciones seleccionadas
 function fetchRecommendations(trackIDS) {
@@ -258,6 +237,9 @@ function fetchRecommendations(trackIDS) {
       let recommendationContainer = document.createElement("section");
       recommendationContainer.setAttribute("class", "recommendationContainer");
       recommendationContainer.setAttribute("class", "playlist-div");
+      let heading = document.createElement("h3");
+      heading.innerHTML = "Here are your recommendations";
+      recommendationContainer.append(heading);
       mainIndex.appendChild(recommendationContainer);
       let recommendationsList = document.createElement("ul");
       tracksRecommended.map((trackRecommended) => {
@@ -270,7 +252,6 @@ function fetchRecommendations(trackIDS) {
         let openSpoty = trackRecommended.external_urls.spotify;
         let previewAudio = document.createElement("audio");
         previewAudio.src = previewUrl;
-
 
         previewAudio = document.createElement("audio");
         previewAudio.innerHTML = '<i class="fa-solid fa-play"></i>';
@@ -290,6 +271,6 @@ function fetchRecommendations(trackIDS) {
         recommendationsList.appendChild(divRecommendedTrack);
         // divRecommendedTrack.appendChild(previewAudio);
       });
-      recommendationContainer.appendChild(recommendationsList);
+      recommendationContainer.append(recommendationsList);
     });
 }
