@@ -1,10 +1,10 @@
 //* Seleccionamos elementos padre del DOM
-let playlistContainer = document.querySelector(".playlist-container");
-let nextBtn = document.querySelector('.playlist-container button');
-let mainIndex = document.querySelector('#index'); 
+let playlistContainer;
+let nextBtn;
+let mainIndex = document.querySelector("#index");
 //Seleccionamos elementos del header
-let header = document.querySelector('header');
-let logIn = document.querySelector('.logIn');
+let header = document.querySelector("header");
+let logIn = document.querySelector(".logIn");
 
 //*Almacenamos en una constante la API Key
 // let apiKey = "2e977a96admshece76346f9b6412p15c859jsn812de15db313";
@@ -17,13 +17,13 @@ let apiKey = "71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265";
 //* Sign In buscar datos usuario
 document.querySelector(".envia").addEventListener("click", () => {
   userName = document.querySelector(".search").value;
-  let instructions = document.querySelector('.instructions');
-  instructions.setAttribute('class', 'hidden');
+  let instructions = document.querySelector(".instructions");
+  instructions.setAttribute("class", "hidden");
   modal.classList.add("oculta-modal");
-  logIn.classList.add('hidden');
-  let profileFigure = document.createElement('figure');
-  let profilePhoto = document.createElement('img');
-  profileFigure.append(profilePhoto)
+  logIn.classList.add("hidden");
+  let profileFigure = document.createElement("figure");
+  let profilePhoto = document.createElement("img");
+  profileFigure.append(profilePhoto);
   header.append(profileFigure);
   const url = `https://spotify23.p.rapidapi.com/user_profile/?id=${userName}&playlistLimit=100&artistLimit=100`;
   const options = {
@@ -44,14 +44,27 @@ document.querySelector(".envia").addEventListener("click", () => {
       let playlistArray = datos.public_playlists;
       profilePhoto.src = imgSrc;
       // Seleccionamos elementos del DOM
-      let userNameDom = document.querySelector(".userName");
-      let figure = document.querySelector(".figurePhoto");
+      let sectionProfile = document.createElement("section");
+      sectionProfile.setAttribute("class", "profile");
+      playlistContainer = document.createElement("section");
+      playlistContainer.setAttribute("class", "playlist-container");
+      nextBtn = document.createElement("button");
+      nextBtn.innerHTML = 'Get Recommendations';
+      nextBtn.setAttribute("class", "logIn");
+      playlistContainer.append(nextBtn)
+      mainIndex.append(sectionProfile, playlistContainer);
+      let userNameDom = document.createElement("h2");
+      userNameDom.setAttribute("class", "userName");
+      let figure = document.createElement("figure");
+      figure.setAttribute("class", "figurePhoto");
       let img = document.createElement("img");
       figure.appendChild(img);
-      let playlistNumberSpan = document.querySelector(".playlistNumber");
+
+      let playlistNumberSpan = document.createElement("p");
+      playlistNumberSpan.setAttribute("class", "playlistNumber");
       let containerHeading = document.createElement("h3");
       playlistContainer.appendChild(containerHeading);
-
+      sectionProfile.append(figure, userNameDom, playlistNumberSpan);
       // Damos contenido a los elementos del DOM
       userNameDom.innerHTML = userName;
       img.src = imgSrc;
@@ -67,7 +80,6 @@ document.querySelector(".envia").addEventListener("click", () => {
         // fetchPlaylistTracks(playlistID);
       });
       //Llamamos a la función del boton para que seleccione las playlists
-      nextBtn.classList.remove('hidden');
       selectPlaylists();
     });
 });
@@ -94,8 +106,8 @@ function fetchPlaylistData(playlistID) {
 
       // Seleccionamos y creamos elementos del DOM
       let playlistDiv = document.createElement("div");
-      playlistDiv.setAttribute('class', 'playlist-div');
-      playlistDiv.setAttribute('id', playlistID);
+      playlistDiv.setAttribute("class", "playlist-div");
+      playlistDiv.setAttribute("id", playlistID);
 
       /*// Activar playlist seleccionada
       playlistDiv.addEventListener('click', (e)=>{
@@ -112,17 +124,18 @@ function fetchPlaylistData(playlistID) {
       });*/
 
       // Activar playlist seleccionada
-      playlistDiv.addEventListener('click', (event) => {
+      playlistDiv.addEventListener("click", (event) => {
         event.stopPropagation(); // Detiene la propagación del evento click
-        
-        if (!event.target.closest('.tracksList')) { // Verificar si el clic no proviene de un elemento dentro de tracksList
-          playlistDiv.classList.toggle('playlist-active');
+
+        if (!event.target.closest(".tracksList")) {
+          // Verificar si el clic no proviene de un elemento dentro de tracksList
+          playlistDiv.classList.toggle("playlist-active");
         }
-        
-        if(playlistDiv.classList.contains("playlist-active")){
+
+        if (playlistDiv.classList.contains("playlist-active")) {
           let playlistID = playlistDiv.id;
           if (!loadedPlaylists[playlistID]) {
-            fetchPlaylistTracks(playlistID,playlistDiv);
+            fetchPlaylistTracks(playlistID, playlistDiv);
             loadedPlaylists[playlistID] = true; // Marcar la lista de reproducción como cargada
           }
         }
@@ -132,25 +145,31 @@ function fetchPlaylistData(playlistID) {
       let playlistFigure = document.createElement("figure");
       let playlistImgDom = document.createElement("img");
       let playlistTrackNumberDom = document.createElement("p");
-      let playlistContainer = document.querySelector(".playlist-container");
+      // let playlistContainer = document.createElement("section");
+      // mainIndex.append(playlistContainer);
+      // playlistContainer.setAttribute("class", "playlist-container");
       playlistFigure.append(playlistImgDom);
-      playlistDiv.append(playlistFigure, playlistNameDom, playlistTrackNumberDom);
+      playlistDiv.append(
+        playlistFigure,
+        playlistNameDom,
+        playlistTrackNumberDom
+      );
 
       playlistContainer.appendChild(playlistDiv);
 
       // Damos contenido a los elementos del DOM
       playlistNameDom.innerHTML = playlistName;
       playlistImgDom.src = playlistImgSrc;
-      playlistTrackNumberDom.innerHTML = playlistTrackNumber + ' tracks';
+      playlistTrackNumberDom.innerHTML = playlistTrackNumber + " tracks";
     });
 }
 
- //* Función botón next
-function selectPlaylists(){
-  nextBtn.addEventListener('click', ()=>{
-    let tracksSeleccionadas = document.querySelectorAll('.track-active');
+//* Función botón next
+function selectPlaylists() {
+  nextBtn.addEventListener("click", () => {
+    let tracksSeleccionadas = document.querySelectorAll(".track-active");
     let arrayTrackIds = [];
-    tracksSeleccionadas.forEach(function(trackSeleccionada){
+    tracksSeleccionadas.forEach(function (trackSeleccionada) {
       let trackID = trackSeleccionada.id;
       arrayTrackIds.push(trackID);
     });
@@ -160,136 +179,128 @@ function selectPlaylists(){
   });
 }
 
-
 //* Cogemos info tracks x cada playlist y mostramos las tracks
 function fetchPlaylistTracks(playlistID, playlistDiv) {
   const url = `https://spotify23.p.rapidapi.com/playlist_tracks/?id=${playlistID}&offset=0&limit=100`;
   const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'X-RapidAPI-Key': '71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265',
-      'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-    }
+      "X-RapidAPI-Key": "71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265",
+      "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+    },
   };
 
- fetch(url, options)
-  .then((response) => response.json())
-  .then((data) => {
-    let tracksArray = data.items;
-    // let trackList = document.querySelectorAll('.tracksList');
-    let tracksList = document.createElement("ul");
-    tracksList.setAttribute('class', 'tracksList');
+  fetch(url, options)
+    .then((response) => response.json())
+    .then((data) => {
+      let tracksArray = data.items;
+      // let trackList = document.querySelectorAll('.tracksList');
+      let tracksList = document.createElement("ul");
+      tracksList.setAttribute("class", "tracksList");
 
-    tracksArray.map((track) =>{
-      // Seleccionamos variables del API
-      let trackID = track.track.id;
-      let trackName = track.track.name;
-      let previewUrl = track.track.preview_url;
-      let artistName = track.track.artists[0].name;
-      let artistUrl = track.track.artists[0].external_urls.spotify; 
-      let openSpoty = track.track.external_urls.spotify;
-      
-      let previewAudio = document.createElement('audio');
-      previewAudio.innerHTML ='<i class="fa-solid fa-play"></i>'
-      //// previewAudio.id = "player";
-      //// let audioDiv = document.createElement("div");
-      //// let playBtn = document.createElement("button");
-      //// playBtn.onclick = document.getElementById('player').play();
-      //// let pauseBtn = document.createElement("button");
-      //// pauseBtn.onclick = document.getElementById('player').pause();
-      //// audioDiv.append(playBtn,pauseBtn);
-      // ! decidir que fer tema controls
-      previewAudio.controls = false;
-      previewAudio.src = previewUrl;
+      tracksArray.map((track) => {
+        // Seleccionamos variables del API
+        let trackID = track.track.id;
+        let trackName = track.track.name;
+        let previewUrl = track.track.preview_url;
+        let artistName = track.track.artists[0].name;
+        let artistUrl = track.track.artists[0].external_urls.spotify;
+        let openSpoty = track.track.external_urls.spotify;
 
-      // Creamos un li para cada track
-      let trackDiv = document.createElement('li');
-      trackDiv.setAttribute('class', 'track');
-      trackDiv.id = trackID;
-      trackDiv.innerHTML = `
+        let previewAudio = document.createElement("audio");
+        previewAudio.innerHTML = '<i class="fa-solid fa-play"></i>';
+        //// previewAudio.id = "player";
+        //// let audioDiv = document.createElement("div");
+        //// let playBtn = document.createElement("button");
+        //// playBtn.onclick = document.getElementById('player').play();
+        //// let pauseBtn = document.createElement("button");
+        //// pauseBtn.onclick = document.getElementById('player').pause();
+        //// audioDiv.append(playBtn,pauseBtn);
+        // ! decidir que fer tema controls
+        previewAudio.controls = false;
+        previewAudio.src = previewUrl;
+
+        // Creamos un li para cada track
+        let trackDiv = document.createElement("li");
+        trackDiv.setAttribute("class", "track");
+        trackDiv.id = trackID;
+        trackDiv.innerHTML = `
         <p>${trackName}</p>
         <p><a href="${artistUrl}" target="_blank">${artistName}</a></p>
         <p><a href="${openSpoty}" target="_blank">Listen on spotify  <i class="fa-brands fa-spotify"></i></a></p>
       `;
-      trackDiv.appendChild(previewAudio);
-      //// trackDiv.appendChild(audioDiv);
+        trackDiv.appendChild(previewAudio);
+        //// trackDiv.appendChild(audioDiv);
 
-      // Activar track seleccionada
-      trackDiv.addEventListener('click', ()=>{
-        trackDiv.classList.toggle('track-active');
+        // Activar track seleccionada
+        trackDiv.addEventListener("click", () => {
+          trackDiv.classList.toggle("track-active");
+        });
+        // Añadimos li / tracks a la ul
+        tracksList.append(trackDiv);
       });
-      // Añadimos li / tracks a la ul
-      tracksList.append(trackDiv);
-
+      playlistDiv.append(tracksList);
     });
-    playlistDiv.append(tracksList);
-  });
 }
 //Cuando haya seleccionado suficientes tracks aparece el boton next
 //Llamar a esta funcion con un click al botton next
 
 //* Llamamos a las recomendaciones basadas en los id de las canciones seleccionadas
-function fetchRecommendations(trackIDS){
-  const url =`https://spotify23.p.rapidapi.com/recommendations/?limit=100&seed_tracks=${trackIDS}`;
+function fetchRecommendations(trackIDS) {
+  const url = `https://spotify23.p.rapidapi.com/recommendations/?limit=100&seed_tracks=${trackIDS}`;
   const options = {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'X-RapidAPI-Key': '71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265',
-      'X-RapidAPI-Host': 'spotify23.p.rapidapi.com'
-    }
+      "X-RapidAPI-Key": "71c2eb0700msheaf53ea0c6cae9dp1f14f5jsn792044830265",
+      "X-RapidAPI-Host": "spotify23.p.rapidapi.com",
+    },
   };
 
-fetch(url, options)
-  .then(response => response.json())
-  .then((recommendations) =>{
-    let seeds = recommendations.seeds;
-    let tracksRecommended = recommendations.tracks;
-    playlistContainer.setAttribute('class', 'hidden');
-    let recommendationContainer = document.createElement('section');
-    recommendationContainer.setAttribute('class', 'recommendationContainer');
-    recommendationContainer.setAttribute('class', 'playlist-div');
-    mainIndex.appendChild(recommendationContainer);
-    let recommendationsList = document.createElement('ul');
-    // recommendationsList.setAttribute('class', 'tracksList');
-    tracksRecommended.map((trackRecommended) =>{
-      // Seleccionamos variables del API
-      let trackID = trackRecommended.id;
-      let trackName = trackRecommended.name;
-      let previewUrl = trackRecommended.preview_url;
-      let artistName = trackRecommended.artists[0].name;
-      let artistUrl = trackRecommended.artists[0].external_urls.spotify; 
-      let openSpoty = trackRecommended.external_urls.spotify;
-      let previewAudio = document.createElement('audio');
-      previewAudio.controls = false;
-      previewAudio.src = previewUrl;
-      
-      let divRecommendedTrack = document.createElement('li');
-      divRecommendedTrack.setAttribute('class', 'track');
-      divRecommendedTrack.id = trackID;
-      divRecommendedTrack.innerHTML = `
+  fetch(url, options)
+    .then((response) => response.json())
+    .then((recommendations) => {
+      let seeds = recommendations.seeds;
+      let tracksRecommended = recommendations.tracks;
+      playlistContainer.setAttribute("class", "hidden");
+      let recommendationContainer = document.createElement("section");
+      recommendationContainer.setAttribute("class", "recommendationContainer");
+      recommendationContainer.setAttribute("class", "playlist-div");
+      mainIndex.appendChild(recommendationContainer);
+      let recommendationsList = document.createElement("ul");
+      // recommendationsList.setAttribute('class', 'tracksList');
+      tracksRecommended.map((trackRecommended) => {
+        // Seleccionamos variables del API
+        let trackID = trackRecommended.id;
+        let trackName = trackRecommended.name;
+        let previewUrl = trackRecommended.preview_url;
+        let artistName = trackRecommended.artists[0].name;
+        let artistUrl = trackRecommended.artists[0].external_urls.spotify;
+        let openSpoty = trackRecommended.external_urls.spotify;
+        let previewAudio = document.createElement("audio");
+        previewAudio.controls = false;
+        previewAudio.src = previewUrl;
+
+        let divRecommendedTrack = document.createElement("li");
+        divRecommendedTrack.setAttribute("class", "track");
+        divRecommendedTrack.id = trackID;
+        divRecommendedTrack.innerHTML = `
         <p>${trackName}</p>
         <p><a href="${artistUrl}" target="_blank">${artistName}</a></p>
         <p><a href="${openSpoty}" target="_blank">Listen on Spotify  <i class="fa-brands fa-spotify"></i></a></p>
       `;
-      recommendationsList.appendChild(divRecommendedTrack);
-      divRecommendedTrack.appendChild(previewAudio);
-      
+        recommendationsList.appendChild(divRecommendedTrack);
+        divRecommendedTrack.appendChild(previewAudio);
 
-      console.log(trackID);
-      console.log(trackName);
-      console.log(previewUrl);
-      console.log(artistName);
-      console.log(artistUrl);
-      console.log(openSpoty);
-    })
+        console.log(trackID);
+        console.log(trackName);
+        console.log(previewUrl);
+        console.log(artistName);
+        console.log(artistUrl);
+        console.log(openSpoty);
+      });
       recommendationContainer.appendChild(recommendationsList);
-    
-
-  })
-
+    });
 }
-
-
 
 /* 
 ? es millor buscar totes les cançons de cop per totes les playlist per reduir el num de peticions? en lloc de obrir i tancar playlists per veure els tracks?

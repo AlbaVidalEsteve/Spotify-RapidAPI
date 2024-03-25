@@ -9,13 +9,14 @@
 :root{
     font-size: 16px;
     --black: #16191c;
+    --white-05: rgba(255, 255, 255, 0.05);
     --white-20: rgba(255, 255, 255, 0.20);
     --white-30: rgba(255, 255, 255, 0.30);
     --white-50: rgba(255, 255, 255, 0.50);
     --white: rgba(255, 255, 255, 0.80);
     --accent:#82be90;
     --accent-disabled:rgb(66, 110, 76);
-    --gradient: linear-gradient(180deg, rgba(130,190,144,1) 0%, rgba(75,106,85,1) 0%, rgba(57,78,65,1) 11%, rgba(50,68,58,1) 14%, rgba(41,55,49,1) 17%, rgba(22,25,28,1) 29%, rgba(22,25,28,1) 52%);
+    /* --gradient: linear-gradient(180deg, rgba(130,190,144,1) 0%, rgba(75,106,85,1) 0%, rgba(57,78,65,1) 11%, rgba(50,68,58,1) 14%, rgba(41,55,49,1) 17%, rgba(22,25,28,1) 29%, rgba(22,25,28,1) 52%); */
 }
 
 body{
@@ -23,11 +24,10 @@ body{
     line-height: 1.5rem;
     font-family: "Open Sans", sans-serif;
     display: flex;
-    height: 100vh;
+    height: 100%;
     flex-direction: column;
     background-color: var(--black);
     color: var(--white);
-
 }
 /* Presets */
 h1, h2, h3, h4{
@@ -60,14 +60,15 @@ ul{
 header{
     flex: 0 0 auto;
     width: 100%;
+    height: 11vh;
     display: grid;
-    grid-template-columns: 40px 1fr  auto;
+    grid-template-columns: 2.2rem 1fr  auto;
     align-items: center;
     justify-content: left;
     padding: .5rem;
     gap: .5rem;
     & figure{
-        max-width: 40px;
+        max-width: 2.2rem;
         & img{
             width: 100%;
             border-radius: 50%;
@@ -83,9 +84,11 @@ header{
     background-color: var(--accent-disabled);
     border: 1px solid var(--accent-disabled);
     color: var(--white);
-    padding: .5rem;
-    border-radius: 20px;
+    padding: .7rem;
+    border-radius: 1.5rem;
     justify-self: right;
+    max-width: max-content;
+    font-size: 1rem;
 }
 .logIn:hover{
     /* background-color: var(--accent); */
@@ -98,6 +101,7 @@ header{
 /** FOOTER */
 footer{
     flex:0 0 auto;
+    background-color: var(--white-05);
     border-top: 1px solid var(--white-20);
     padding: 1rem 2rem;
     display: flex;
@@ -151,7 +155,7 @@ main{
 
     }
 }
-& .track{
+.track{
     padding: .5rem 0;
     border-top: 1px solid var(--white-20);
     border-bottom: 1px solid var(--white-20);
@@ -195,27 +199,47 @@ main{
     }
 }
 /*? SECTION Instructions */
-.instructions{
-    padding-top: 2rem;
+/* #index{
     background: var(--gradient);
+} */
+
+.hero {
+    padding: 2rem;
+    background-image: url(../media/hero-dark.png);
+    background-size: cover;
+    min-height: 89vh;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem;
     & h2{
         font-size: 3rem;
         line-height: 110%;
         text-align: center;
     }
     & h3{
-        font-family: "Open Sans", sans-serif;;
+        font-family: "Open Sans", sans-serif;
         font-weight: bold;
         text-align: center;
         font-size: 1rem;
         letter-spacing: .07rem;
     }
+}
+.instructions{
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;   
+    min-height: 100vh;
     & h4{
-        padding-top: 3rem;
         font-size: 1.3rem;
         color: var(--accent);
+        width: 100%;
     }
     & ol{
+        width: 100%;
         padding-left: 3rem;
         & li{
             padding-bottom: 1rem;
@@ -231,18 +255,21 @@ main{
         text-align: center;
         color: var(--white-50);
     }
+    & button{
+        width: 100px;
+    }
 }
 /*? SECTION Profile */
 .profile{
     display: grid;
-    grid-template-columns: 32% 1fr;
+    grid-template-columns: minmax(100px,13%) 1fr;
     justify-content: center;
     & figure{
         order: 0;
         grid-row: span 4;
         & img{
             width: 100%;
-            border-radius: 10px;
+            border-radius: 0.8rem;
         }
     }
 }
@@ -250,6 +277,8 @@ main{
 .playlist-container{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 1rem;
     gap: 1rem;
     & h3{
@@ -260,18 +289,23 @@ main{
     }
     & .playlist-div{
         display: grid;
-        grid-template-columns: 68px 1fr;
+        grid-template-columns: minmax(70px,13%) 1fr;
         column-gap: .5rem;
         background-color: var(--white-20);
         padding: .5rem;
-        border-radius: 7px;
+        border-radius: 0.7rem;
         color: var(--white);
+        width: 100%;
         & figure{
             width: 100%;
             grid-row: span 3;
+            display: flex;
             & img{
                 width: 100%;
-                border-radius: 5px;
+                border-radius: 0.5rem;
+                justify-content: center;
+                align-items: center;
+    
             }
         }
         & h4{
@@ -376,7 +410,7 @@ form ul{
             background-color: var(--white-20);
             border: none;
             border-bottom:1px solid var(--accent-disabled);
-            border-radius: 2px;
+            border-radius: 0.15rem;
             padding: .3rem;
             line-height: 1.5rem;
             font-size: 1.1rem;
@@ -428,7 +462,7 @@ form ul{
 /* Div consulta */
 .consulta{
     background-color: var(--accent-disabled);
-    border-radius: 6px;
+    border-radius: 0.5rem;
     padding: .5rem;
     display: flex;
     justify-content: center;
@@ -437,6 +471,7 @@ form ul{
         background-color: transparent;
         border: none;
         height: 100%;
+        font-size: 1rem;
     }
     & input::placeholder{
         color: var(--white);
@@ -452,7 +487,7 @@ form ul{
         color: var(--white);
         align-self: flex-end;
         padding: 0.5rem;
-        /* font-size: 1.1rem; */
+        font-size: 1.1rem;
         font-weight: bold;
         transition: transform ease 0.3s;
     }
@@ -481,6 +516,10 @@ form ul{
 
 /* ? MEDIA QUERY */
 @media screen and (min-width: 768px) {
+    .instructions{
+        width: 80vw;
+        margin: auto;
+    }
     form ul{
         width: 80%;
         margin: auto;
@@ -488,13 +527,33 @@ form ul{
 }
 
 @media screen and (min-width: 1024px) {
-    
+    :root{
+        font-size: 18px;
+    }
+    .instructions{
+        width: 70vw;
+    }
+    footer ul, footer div{
+        width: 70%;
+        margin: auto;
+    }
+    /* footer div{
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+    } */
 }
 
 @media screen and (min-width: 1440px) {
+    :root{
+        font-size: 20px;
+    }
     
 }
 @media screen and (min-width: 2560px) {
+    :root{
+        font-size: 36px;
+    }
     
 }
 
