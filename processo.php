@@ -18,12 +18,12 @@
         // Envio del correo
         $_asunto = 'Report Input';
         $_correo = 'vidalba97@gmail.com';
-        $_contenido = "\n
-            $_nombre\n
-            $_correo\n
-            $_resultado\n";
-        $_remite = "mail@mail.com";
-        mail($_correo, $_asunto, $_contenido, $_remite);
+        $_contenido = "\n".
+            $_nombre.'\n'.
+            $_correo."\n".
+            $_resultado."\n";
+        
+        mail($_correo, $_asunto, $_contenido);
     }
 ?>
 
@@ -61,6 +61,7 @@
             </div>
         </div>
         <section class="proceso">
+            <h2><?php echo $_resultado; ?></h2>
 
         </section>
     </main>
